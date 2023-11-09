@@ -62,14 +62,17 @@ function App() {
       setUploadStatus(Status.processing);
       const formData = new FormData();
       formData.append('file', selectedFile);
+      console.log(selectedFile)
 
       try {
-        const response = await axios.post('YOUR_SERVER_ENDPOINT', formData, {
+        const response = await axios.post('https://drips-logs-processing-server-6c4069d1815a.herokuapp.com/file', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
           responseType: 'blob',
         });
+
+        console.log(response)
 
         const blob = new Blob([response.data], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -77,7 +80,8 @@ function App() {
         const url = window.URL.createObjectURL(blob);
         setDownloadLink(url);
         setUploadStatus(Status.fileReady);
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Error uploading the file:', error);
         setUploadStatus('error');
       }
@@ -153,10 +157,10 @@ function App() {
                     color="secondary"
                     href={downloadLink}
                     disabled={uploadStatus !== 'fileReady'}
+                    startIcon={<CloudDownloadIcon />}
 
                     download="processed_file.xlsx"
                 >
-                  <CloudDownloadIcon />
                    Download Processed File
                 </Button>
                 {uploadStatus === 'processing' && (
