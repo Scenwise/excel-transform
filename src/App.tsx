@@ -19,7 +19,7 @@ import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import SendIcon from '@mui/icons-material/Send';
 
-const acceptableFilName = ['xlsx', 'xls'];
+const acceptableFilName = ['csv'];
 
 const checkFileName = (name: string) => {
   const extension = name.split('.').pop();
@@ -96,30 +96,30 @@ function App() {
   };
 
   return (
-      <Container maxWidth="md">
-        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+      <Container maxWidth='md'>
+        <Grid container justifyContent='center' alignItems='center' style={{ minHeight: '100vh' }}>
           <Card sx={{ bgcolor: '#daebf2', borderRadius: 2, minHeight: 300, minWidth: 500, boxShadow: 3}}>
             <CardContent>
-              <Typography variant="h5" gutterBottom sx={{marginBottom: 3}}>
+              <Typography variant='h5' gutterBottom sx={{marginBottom: 3}}>
                 Excel File Upload and Download
               </Typography>
 
               {/* The upload and download element */}
               <Stack spacing={4}>
                   {/* The button to upload the file */}
-                  <Stack direction="row" spacing={2}>
-                    <label htmlFor="file">
+                  <Stack direction='row' spacing={2}>
+                    <label htmlFor='file'>
                       <Button
-                          variant="contained"
-                          component="span"
+                          variant='contained'
+                          component='span'
                           startIcon={<CloudUploadIcon />}
                       >
                         Upload Excel File
                       </Button>
                       <input
-                          type="file"
-                          accept="xlsx,xls"
-                          id="file"
+                          type='file'
+                          accept='csv'
+                          id='file'
                           multiple={false}
                           style={{ display: 'none' }}
                           onChange={(e) => handleFileChange(e)}
@@ -138,39 +138,39 @@ function App() {
                   </Stack>
 
               {/* The file name */}
-              {selectedFile && (<Stack direction="row">
+              {selectedFile && (<Stack direction='row'>
                 <Tooltip title={selectedFile.name}>
-                  <Typography variant="subtitle1" sx={{ maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <Typography variant='subtitle1' sx={{ maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {selectedFile.name}
                   </Typography>
                 </Tooltip>
 
-                <IconButton size="small" onClick={handleRemove}>
+                <IconButton size='small' onClick={handleRemove}>
                   <CloseIcon sx={{ fontSize: 'inherit' }} />
                 </IconButton>
               </Stack>)}
 
               {/* The button to download the file */}
-              <Stack direction="row" spacing={2}>
+              <Stack direction='row' spacing={2}>
                 <Button
-                    variant="contained"
-                    color="secondary"
+                    variant='contained'
+                    color='secondary'
                     href={downloadLink}
                     disabled={uploadStatus !== 'fileReady'}
                     startIcon={<CloudDownloadIcon />}
 
-                    download="processed_file.xlsx"
+                    download='processed_file.xlsx'
                 >
                    Download Processed File
                 </Button>
                 {uploadStatus === 'processing' && (
-                    <HourglassEmptyIcon color="info" />
+                    <HourglassEmptyIcon color='info' />
                 )}
                 {uploadStatus === 'fileReady' && (
-                    <CheckCircleIcon color="success" />
+                    <CheckCircleIcon color='success' />
                 )}
                 {uploadStatus === 'error' && (
-                    <ErrorIcon color="error" />
+                    <ErrorIcon color='error' />
                 )}
               </Stack>
 
