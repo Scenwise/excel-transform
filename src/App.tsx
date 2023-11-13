@@ -62,7 +62,6 @@ function App() {
       setUploadStatus(Status.processing);
       const formData = new FormData();
       formData.append('file', selectedFile);
-      console.log(selectedFile)
 
       try {
         const response = await axios.post('https://drips-logs-processing-server-6c4069d1815a.herokuapp.com/file', formData, {
@@ -100,9 +99,17 @@ function App() {
         <Grid container justifyContent='center' alignItems='center' style={{ minHeight: '100vh' }}>
           <Card sx={{ bgcolor: '#daebf2', borderRadius: 2, minHeight: 300, minWidth: 500, boxShadow: 3}}>
             <CardContent>
-              <Typography variant='h5' gutterBottom sx={{marginBottom: 3}}>
-                Excel File Upload and Download
-              </Typography>
+              <Stack>
+                <Typography variant='h4' gutterBottom sx={{marginBottom: 3}}>
+                  <b>RWS rapportage</b>
+                </Typography>
+                <Typography variant='h6' gutterBottom sx={{marginBottom: 3}}>
+                  Post-processing Tool
+                </Typography>
+
+
+              </Stack>
+
 
               {/* The upload and download element */}
               <Stack spacing={4}>
@@ -114,7 +121,7 @@ function App() {
                           component='span'
                           startIcon={<CloudUploadIcon />}
                       >
-                        Upload Excel File
+                        Upload Dynac logging CSV file
                       </Button>
                       <input
                           type='file'
